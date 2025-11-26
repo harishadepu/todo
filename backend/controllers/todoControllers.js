@@ -26,7 +26,7 @@ export const addTodo = async(req,res)=>{
 export const deleteTodo = async(req,res)=>{
     try{
         const {id} = req.params;
-        const query = "DELETE FROM TODOS WHERE id = ?";
+        const query = "DELETE FROM todos WHERE id = ?";
         await pool.query(query,[id]);
         res.status(200).json({message:"todo deleted successfully"})
     }

@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 const App = () => {
   const [todos,setTodos] = useState([])
   const [text,setText] = useState("")
+  const baseUrl = "https://todo-cpz8.onrender.com/"
   useEffect(()=>{
-      fetch("http://localhost:5000/todos/").then(res=>res.json())
+      fetch(`${baseUrl}todos`).then(res=>res.json())
     .then(data=>setTodos(data))
     .catch(err=>console.log(err))
   })
@@ -16,7 +17,7 @@ const App = () => {
       },
       body:JSON.stringify({title:text})
     }
-    fetch("http://localhost:5000/todos/add",payload).then(res=>res.json())
+    fetch(`${baseUrl}todos/add`,payload).then(res=>res.json())
     .then(data=>setTodos([...todos,data]))
     .catch(err=>console.log(err))
     setText("")
@@ -26,7 +27,7 @@ const App = () => {
     const payload = {
       method:"DELETE",
     }
-    fetch(`http://localhost:5000/todos/delete/${id}`,payload).then(res => {
+    fetch(`${baseUrl}todos/delete/${id}`,payload).then(res => {
     if (!res.ok) throw new Error(`Delete failed: ${res.status}`);
     return res.json();
   })
